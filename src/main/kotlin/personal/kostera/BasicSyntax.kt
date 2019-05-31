@@ -80,7 +80,7 @@ fun getLengthElvisOperator(outerClass: OuterClass?): Int {
 }
 
 // Safe call operator with let
-fun getListWithoutNulls(list : List<Any?>): List<Any> {
+fun getListWithoutNulls(list: List<Any?>): List<Any> {
     val resultList = ArrayList<Any>()
     for (item in list) {
         // This is only executed if item is not null
@@ -90,7 +90,7 @@ fun getListWithoutNulls(list : List<Any?>): List<Any> {
 }
 
 // Same logic with kotlin built in function
-fun getListWithoutNullsKotlinFilter(list : List<Any?>) = list.filterNotNull()
+fun getListWithoutNullsKotlinFilter(list: List<Any?>) = list.filterNotNull()
 
 // NPE-lovers: the not-null assertion operator
 fun throwsNPEIfNull(value: String?): Int {
@@ -100,4 +100,25 @@ fun throwsNPEIfNull(value: String?): Int {
 // Safe cast operator as?
 fun parseIntSafeCastOperator(value: Any): Int? {
     return value as? Int
+}
+
+// object keyword creates a singleton instance
+// object declarations are initialized lazily, when accessed for the first time
+// They don't have constructors, but values can be initialized with init {} block
+object Singleton {
+    lateinit var value: String
+
+    init {
+        value = "init value"
+    }
+}
+
+fun objectReference() {
+    println(Singleton.value)
+    doSomeSneakyStuff()
+    println(Singleton.value)
+}
+
+fun doSomeSneakyStuff() {
+    Singleton.value = "zonk"
 }

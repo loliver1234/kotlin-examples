@@ -33,6 +33,28 @@ infix fun String.add(value: String): String {
     return this + value
 }
 
+// Local Functions
+
+fun functionWithLocals(count: Int) {
+    fun localFunction() {
+        println("HelloWorld")
+    }
+    repeat(count) {
+        localFunction()
+    }
+}
+
+// Lambdas with receivers
+class Status(var code: Int? = null, var description: String? = null)
+fun status(init: Status.() -> Unit): Status = Status().apply(init)
+
+fun createStatus() {
+    val status = status {
+        code = 404
+        description = "Not found"
+    }
+}
+
 // Inline Functions
 // inline keyword
 // IntelliJ warns about when to use inline functions
